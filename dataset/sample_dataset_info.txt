@@ -1,0 +1,16 @@
+Sample Dataset:
+This is a placeholder file. Use Kaggle datasets such as:
+https://www.kaggle.com/datasets/muhammadardiputra/grape-leaf-disease-dataset
+
+Organize dataset as:
+dataset/
+    train/
+        Black Rot/
+        Esca/
+        Leaf Blight/
+        Healthy/
+    validation/
+        Black Rot/
+        Esca/
+        Leaf Blight/
+        Healthy/

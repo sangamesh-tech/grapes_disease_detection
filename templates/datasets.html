@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Datasets - Grape Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Datasets</h1>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a> |
+        <a href="{{ url_for('diagnosis') }}">Diagnosis</a>
+    </nav>
+    <section>
+        <p>You can use the <a href="https://www.kaggle.com/datasets/">Kaggle Grape Leaf Disease Dataset</a> to train models.</p>
+        <p>Sample images are stored in the <code>static/gallery</code> folder.</p>
+    </section>
+</body>
+</html>

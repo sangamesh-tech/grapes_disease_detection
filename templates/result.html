@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Diagnosis Result - GrapeCheck AI{% endblock %}
+
+{% block content %}
+<div class="bg-gray-50 min-h-screen py-12">
+    <div class="container mx-auto px-6">
+
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800">Diagnosis Result</h1>
+            <p class="text-gray-600 mt-2">Analysis complete. Here are the findings for your uploaded image.</p>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid lg:grid-cols-5 gap-8">
+
+            <!-- Left Column: Image Analysis -->
+            <div class="lg:col-span-3">
+                <div class="bg-white p-6 rounded-lg shadow-lg h-full">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Image Analysis</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Uploaded Image -->
+                        <div>
+                            <h3 class="font-medium text-center mb-2">Your Uploaded Image</h3>
+                            <img src="{{ url_for('static', filename='uploads/' + filename) if filename else 'https://placehold.co/600x400/9ca3af/ffffff?text=Your+Image' }}" alt="Uploaded Image" class="rounded-lg w-full h-auto object-cover border-2 border-gray-200">
+                        </div>
+                        <!-- Grad-CAM Image -->
+                        <div>
+                            <h3 class="font-medium text-center mb-2">AI Focus (Grad-CAM)</h3>
+                            {% if gradcam_filename %}
+                                <img src="{{ url_for('static', filename='uploads/' + gradcam_filename) }}" alt="Grad-CAM Highlight" class="rounded-lg w-full h-auto object-cover border-2 border-green-400">
+                            {% else %}
+                                <img src="https://placehold.co/600x400/22c55e/ffffff?text=AI+Focus" alt="Grad-CAM Placeholder" class="rounded-lg w-full h-auto object-cover border-2 border-green-400">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Results & Actions -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Prediction Card -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4 border-b pb-2">Prediction</h3>
+                    <div class="text-center">
+                        <p class="text-lg text-gray-600">Detected Disease:</p>
+                        <p class="text-3xl font-bold text-red-600 my-2">{{ prediction or "Unknown" }}</p>
+                        <div class="bg-gray-100 rounded-full px-4 py-1 inline-block">
+                            <p class="text-md font-medium text-gray-800">Confidence: <span class="text-green-600 font-bold">{{ confidence or "N/A" }}%</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solution Card -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4 border-b pb-2">Recommended Solution</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        {{ solution or "No solution available. Please consult a local expert." }}
+                    </p>
+                </div>
+
+                <!-- Actions Card -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Next Steps</h3>
+                    <div class="flex flex-col space-y-3">
+                        <a href="{{ url_for('diagnosis') }}" class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300">Diagnose Another</a>
+                        <a href="{{ url_for('history') }}" class="w-full bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">View History</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

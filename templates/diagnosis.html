@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Diagnosis</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Basic styling for the page */
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            /* --- Background Image Styles --- */
+            background-image: url('https://images.pexels.com/photos/760281/pexels-photo-760281.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        /* Add a dark overlay for better text contrast */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            color: #1a365d;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        p {
+            color: #4a5568;
+        }
+        /* Style the file input */
+        .file-input-wrapper {
+            margin: 25px auto;
+        }
+        .file-input-label {
+            background-color: #edf2f7;
+            color: #4a5568;
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            padding: 30px;
+            cursor: pointer;
+            display: block;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .file-input-label:hover {
+            background-color: #e2e8f0;
+            border-color: #a0aec0;
+        }
+        #file-input {
+            display: none; /* Hide the actual input */
+        }
+        #file-name-display {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #718096;
+        }
+        button {
+            background-color: #2c5282;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #1a365d; /* Darker blue on hover */
+            transform: translateY(-2px);
+        }
+        .result {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #ebf8ff; /* Light blue background */
+            border-left: 5px solid #3182ce; /* Blue accent border */
+            text-align: left;
+            border-radius: 5px;
+        }
+        a.home-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #3182ce;
+            text-decoration: none;
+            font-weight: 600;
+            background: rgba(255,255,255,0.7);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        a.home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="home-link">&larr; Back to Home</a>
+        <h1>Grape Leaf Diagnosis</h1>
+        <p>Upload an image to identify the disease.</p>
+
+        <!-- The form to upload the file -->
+        <form method="POST" enctype="multipart/form-data">
+            <div class="file-input-wrapper">
+                <label for="file-input" class="file-input-label">
+                    <span>Click to select an image</span>
+                </label>
+                <input type="file" name="file" id="file-input" required onchange="updateFileName(this)">
+                <div id="file-name-display"></div>
+            </div>
+            <button type="submit">Diagnose</button>
+        </form>
+
+        <!-- This section will only appear after a diagnosis is made -->
+        {% if diagnosis %}
+        <div class="result">
+            <h3 style="margin-top: 0;">Result:</h3>
+            <p><strong>Disease:</strong> {{ diagnosis }}</p>
+            {% if confidence %}
+                <p><strong>Confidence:</strong> {{ '%.2f'|format(confidence * 100) }}%</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+    </div>
+
+    <script>
+        function updateFileName(input) {
+            const fileNameDisplay = document.getElementById('file-name-display');
+            if (input.files && input.files.length > 0) {
+                fileNameDisplay.textContent = `File selected: ${input.files[0].name}`;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        }
+    </script>
+
+</body>
+</html>

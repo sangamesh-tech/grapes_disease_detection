@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grape Disease Gallery</title>
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts for a clean look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Use the Inter font family */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <a href="{{ url_for('home') }}" class="home-link">&larr; Back to Home</a>
+            <h1 class="text-3xl font-bold text-gray-800">Grape Disease Gallery</h1>
+            <p class="text-gray-600 mt-1">A visual reference for identifying common grape diseases.</p>
+        </div>
+    </header>
+
+    <!-- Main Gallery Section -->
+    <main class="py-12">
+        <div class="container mx-auto px-6">
+
+            <!-- Image Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+                <!-- Image 1: Black Rot -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden group cursor-pointer" onclick="openModal('static\gallery\black_rot_sample.jpg', 'Black Rot')">
+                    <div class="relative">
+                        <img src="static\gallery\black_rot_sample.jpg" alt="Black Rot" class="h-56 w-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Black Rot</h3>
+                    </div>
+                </div>
+
+                <!-- Image 2: Esca (Black Measles) -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden group cursor-pointer" onclick="openModal('static\gallery\esca.JPG', 'Esca (Black Measles)')">
+                    <div class="relative">
+                        <img src="static\gallery\esca.JPG" alt="Esca" class="h-56 w-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Esca (Black Measles)</h3>
+                    </div>
+                </div>
+
+                <!-- Image 3: Leaf Blight -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden group cursor-pointer" onclick="openModal('static\gallery\leaf_blight.png', 'Leaf Blight')">
+                    <div class="relative">
+                        <img src="static\gallery\leaf_blight.png" alt="Leaf Blight" class="h-56 w-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Leaf Blight</h3>
+                    </div>
+                </div>
+                <!-- Image 4: Healthy -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden group cursor-pointer" onclick="openModal('static\gallery\healthy_sample.jpeg', 'Healthy')">
+                    <div class="relative">
+                        <img src="static\gallery\healthy_sample.jpeg" alt="Healthy" class="h-56 w-full object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Healthy</h3>
+                    </div>
+                </div>
+
+
+                <!-- Add more images here following the same pattern -->
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-12 py-6">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 Grape Disease Detection Project</p>
+        </div>
+    </footer>
+
+    <!-- Modal for displaying larger images -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden" onclick="closeModal()">
+        <div class="bg-white p-4 rounded-lg shadow-2xl max-w-4xl max-h-full w-full mx-4" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-800"></h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-800 text-4xl font-light">&times;</button>
+            </div>
+            <div class="flex justify-center">
+                 <img id="modalImage" src="" alt="Enlarged disease image" class="w-auto h-auto object-contain" style="max-height: 80vh;">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get references to the modal elements
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+
+        /**
+         * Opens the modal with a specific image and title.
+         * @param {string} src - The source URL of the image to display.
+         * @param {string} title - The title to display for the image.
+         */
+        function openModal(src, title) {
+            modalImage.src = src;
+            modalTitle.textContent = title;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background from scrolling
+        }
+
+        /**
+         * Closes the image modal.
+         */
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Re-enable background scrolling
+        }
+
+        // Add an event listener to close the modal with the Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>

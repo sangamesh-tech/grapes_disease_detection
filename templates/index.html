@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grape Disease Detection</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a cleaner look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Use the Inter font family */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Simple animation for page load */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header and Navigation -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-green-700">
+                GrapeCheck AI
+            </div>
+            <nav class="hidden md:flex space-x-4">
+                <a href="{{ url_for('diagnosis') }}" class="text-gray-600 hover:text-green-700 transition duration-300">Diagnosis</a>
+                <a href="{{ url_for('gallery') }}" class="text-gray-600 hover:text-green-700 transition duration-300">Gallery</a>
+                <a href="{{ url_for('history') }}" class="text-gray-600 hover:text-green-700 transition duration-300">History</a>
+                <a href="{{ url_for('guide') }}" class="text-gray-600 hover:text-green-700 transition duration-300">Guide</a>
+                <a href="{{ url_for('datasets') }}" class="text-gray-600 hover:text-green-700 transition duration-300">Datasets</a>
+                <a href="{{ url_for('trained_model') }}" class="text-gray-600 hover:text-green-700 transition duration-300">Model</a>
+            </nav>
+            <!-- Mobile Menu Button (optional, for smaller screens) -->
+            <button class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area with Background -->
+    <main class="relative min-h-screen flex items-center">
+        <div class="absolute inset-0">
+            <img src="static\gallery\background image forPlantDoc_ Grapes project.jpg" alt="Grapeyard background" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+        </div>
+        <div class="relative container mx-auto px-6 text-center text-white">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight fade-in-up">
+                Advanced AI for <span class="text-green-400">Grape Disease</span> Detection
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-200 fade-in-up delay-1">
+                Upload an image of a grape leaf and our trained model will instantly identify potential diseases, helping you protect your vineyard.
+            </p>
+            <div class="mt-8 fade-in-up delay-2">
+                <a href="{{ url_for('diagnosis') }}" class="bg-green-600 text-white font-bold py-3 px-8 rounded-full hover:bg-green-700 transition duration-300 transform hover:scale-105 shadow-lg">
+                    Start Diagnosis
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-400">
+            <p>&copy; 2025 GrapeCheck AI Project. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

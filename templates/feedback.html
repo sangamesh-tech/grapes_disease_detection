@@ -1,0 +1,25 @@
+<!-- templates/feedback.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback | Grape Disease Detection</title>
+</head>
+<body>
+    <h2>Feedback Form</h2>
+    <form method="POST" action="/feedback">
+        <label>Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Message:</label><br>
+        <textarea name="message" rows="6" cols="40" required></textarea><br><br>
+
+        <button type="submit">Submit Feedback</button>
+        <li><a href="/feedback">user_dashboard</a></li>
+
+    </form>
+</body>
+</html>

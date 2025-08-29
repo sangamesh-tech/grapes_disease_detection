@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Diagnosis History - GrapeCheck AI{% endblock %}
+
+{% block content %}
+<div class="bg-gray-50 min-h-screen">
+    <!-- Page Header -->
+    <section class="bg-gray-800 text-white py-12 text-center">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl font-bold mb-2">Diagnosis History</h1>
+            <p class="text-lg text-gray-300">Review and manage your past diagnoses.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-2">
+
+            {% if history %}
+                <!-- Action Bar -->
+                <div class="flex justify-end mb-6">
+                    <form action="{{ url_for('delete_all_history') }}" method="POST">
+                        <button type="submit" class="bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300"
+                                onclick="return confirm('Are you sure you want to delete ALL history? This action cannot be undone.');">
+                            Delete All History
+                        </button>
+                    </form>
+                </div>
+
+                <!-- History Table -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="p-4 font-semibold text-gray-600">Image</th>
+                                    <th class="p-4 font-semibold text-gray-600">Prediction</th>
+                                    <th class="p-4 font-semibold text-gray-600">Confidence</th>
+                                    <th class="p-4 font-semibold text-gray-600">Date</th>
+                                    <th class="p-4 font-semibold text-gray-600 text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                {% for record in history %}
+                                <tr>
+                                    <td class="p-4">
+                                        <img src="{{ url_for('static', filename='uploads/' ~ record.filename) if record.filename else 'https://placehold.co/100x100/9ca3af/ffffff?text=Image' }}"
+                                             alt="Uploaded Image" class="h-16 w-16 object-cover rounded-md border">
+                                    </td>
+                                    <td class="p-4 font-medium text-gray-800">{{ record.prediction }}</td>
+                                    <td class="p-4">
+                                        <span class="bg-green-100 text-green-800 font-semibold px-3 py-1 rounded-full">{{ record.confidence }}%</span>
+                                    </td>
+                                    <td class="p-4 text-gray-600">{{ record.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                                    <td class="p-4">
+                                        <div class="flex justify-center items-center gap-2">
+                                            <a href="{{ url_for('download_report', history_id=record.id) }}" class="bg-blue-500 text-white text-sm font-bold py-2 px-3 rounded-lg hover:bg-blue-600 transition duration-300">
+                                                   Download
+                                            </a>
+                                            <form action="{{ url_for('delete_history', history_id=record.id) }}"
+                                                  method="POST" style="display:inline;">
+                                                <button type="submit" class="bg-red-500 text-white text-sm font-bold py-2 px-3 rounded-lg hover:bg-red-600 transition duration-300"
+                                                        onclick="return confirm('Are you sure you want to delete this record?');">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% else %}
+                <!-- No History Message -->
+                <div class="text-center bg-white p-12 rounded-lg shadow-md">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                    </svg>
+                    <h3 class="mt-2 text-xl font-medium text-gray-900">No History Found</h3>
+                    <p class="mt-1 text-gray-500">You have not performed any diagnoses yet.</p>
+                    <div class="mt-6">
+                        <a href="{{ url_for('diagnosis') }}" class="bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300">
+                            Start Your First Diagnosis
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+</div>
+{% endblock %}

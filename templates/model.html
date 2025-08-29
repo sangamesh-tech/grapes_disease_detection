@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trained Model - Grape Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Trained Model</h1>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a> |
+        <a href="{{ url_for('diagnosis') }}">Diagnosis</a>
+    </nav>
+    <section>
+        <p>Download the trained model: <a href="{{ url_for('static', filename='../model/grape_model.h5') }}" download>grape_model.h5</a></p>
+        <p>Model Accuracy: 95%</p>
+        <p>Architecture: CNN (2 Conv layers, Dense, Dropout)</p>
+    </section>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!-- templates/feedback_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Feedback</title>
+</head>
+<body>
+    <h2>User Feedback</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th><th>Name</th><th>Email</th><th>Message</th><th>Date</th>
+        </tr>
+        {% for fb in feedbacks %}
+        <tr>
+            <td>{{ fb.id }}</td>
+            <td>{{ fb.name }}</td>
+            <td>{{ fb.email }}</td>
+            <td>{{ fb.message }}</td>
+            <td>{{ fb.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trained Model Info</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Trained Model Details</h1>
+    <p>This page provides details about the grape leaf disease detection model.</p>
+
+    <h2>Model Information</h2>
+    <ul>
+        <li><strong>Model Type:</strong> Transfer Learning (e.g., MobileNetV2 or CNN)</li>
+        <li><strong>Classes:</strong> Healthy, Black Rot, Esca, Leaf Blight</li>
+        <li><strong>Accuracy:</strong> ~95% (based on training dataset)</li>
+        <li><strong>Framework:</strong> TensorFlow/Keras</li>
+    </ul>
+
+    <p><a href="{{ url_for('home') }}">Back to Home</a></p>
+</body>
+</html>
